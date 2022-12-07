@@ -1,0 +1,60 @@
+#+title: Study Plan
+
+* Materials
+
+** Mathematics
+*** Book
+- Mathematics for Computer Science
+*** Video lectures
+-[[https://www.youtube.com/playlist?list=PLUl4u3cNGP60UlabZBeeqOuoLuj_KNphQ][MIT 6.042J 2015]]
+-[[https://www.youtube.com/playlist?list=PLB7540DEDD482705B][MIT 6.042J 2015 by tom leighton]]
+
+** Algorithms
+*** Book
+- The Algorithm Design Manual
+*** Video lectures
+-[[https://www.youtube.com/playlist?list=PLOtl7M3yp-DX6ic0HGT0PUX_wiNmkWkXx][Steven Skiena Analysis of Algotrithms Lectures]]
+
+** Computer Architecture
+*** Book
+- Computer Systems: A Programmer's Perspective
+*** Video lectures
+-[[https://www.youtube.com/playlist?list=PLhMnuBfGeCDM8pXLpqib90mDFJI-e1lpk][UC Berkeley CS 61C ]]
+
+** Programming
+*** Book
+- Structure and interpretation of computer programs
+*** Video lectures
+-[[https://www.youtube.com/playlist?list=PLhMnuBfGeCDNgVzLPxF9o5UNKG1b-LFY9][UC Berkeley CS 61A SICP]]
+
+** Operating Systems
+*** Book
+- Operating Systems: Three Easy Pieces
+*** Video Lectures
+-[[https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC][ Berkeley CS 162 Operating Systems and Systems Programming]]
+
+** Computer Networking
+*** Book
+- Computer Networking: A Top-down Approach
+*** Video Lectures
+-[[https://www.youtube.com/playlist?list=PL6RdenZrxrw9inR-IJv-erlOKRHjymxMN][ CS 144 Introuction to Computer Networking]]
+
+** Databases
+*** Book
+- Readings in Database Systems
+*** Video Lectures
+-[[https://www.youtube.com/playlist?list=PLYp4IGUhNFmw8USiYMJvCUjZe79fvyYge][UC Berkeley CS 186]]
+
+** Languages and Compilers
+*** Book
+- Crafting interpreters
+*** Video Lectures
+- [[https://www.youtube.com/playlist?list=PLoCMsyE1cvdUZRe1udlyjpzTww1U5olL2][CS 143 Introduction to Compilers]]
+
+** Distributed Systems
+*** Book
+- Designing Data-intensive Applications
+*** Video Lectures
+- [[https://www.youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB][MIT 6.824 Distributed Systems]]
+
+** Artificial Intelligence and Deep Learning
