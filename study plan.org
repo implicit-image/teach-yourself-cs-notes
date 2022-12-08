@@ -58,3 +58,17 @@
 - [[https://www.youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB][MIT 6.824 Distributed Systems]]
 
 ** Artificial Intelligence and Deep Learning
+
+
+* Study order
+
+
+1. Maths
+2. Algorithms
+3. Programming
+4. Architecture
+5. Operating Systems
+6. Networking
+7. Databases
+8. Languages and Compilers
+9. Distributed Systems
