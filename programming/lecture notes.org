@@ -1,0 +1,20 @@
+#+title: Lecture Notes
+
+
+#+begin_src racket
+#lang sicp
+
+
+;; check if string has vowels
+(define (has-vowels str)
+
+  (if (not (string? str))
+      (error "argument is not a string")
+      (if (map (string-contains? str) '(a e i o u))
+        ;;string contains vowels
+        [])
+
+#+end_src
+
+#+RESULTS:
+: 43

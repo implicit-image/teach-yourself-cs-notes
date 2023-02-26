@@ -1,0 +1,29 @@
+#+title: Assignments
+#+startup: latexpreview
+#+latex_class: article
+
+
+** Problem set 1
+
+*** Problem 1
+S(x) := "x" has been a student of 6.042
+A(x) := "x" has gotten an A in 6.042
+T(x) := "x" is a TA of 6.042
+E(x, y) := "x" and "y" are the same person
+
+
+\begin{problem1}
+a) \exists_x \in X, s.t. S(x) \land A(x)
+
+b) \forall_x \in X, s.t. T(x) \land S(x) \rightarrow A(x)
+
+c) \exists!_x \in X, s.t. T(x) \land (\neg A(x))
+
+d) \forall_x \in X, \lvert { T(x) \land \neg S(x) } \rvert > 3
+\end{problem1}
+
+*** Problem 2
+   \begin{problem2}
+a)
+\neg (P \lor )
+   \end{problem2}

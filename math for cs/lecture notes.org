@@ -1,0 +1,14 @@
+#+title: Lecture Notes
+#+startup: latexpreview
+* Course MIT 6.042J
+
+
+
+
+** Proofs
+
+\begin{proof}
+
+\forall{n}, \exists{n > 1}
+
+\end{proof}

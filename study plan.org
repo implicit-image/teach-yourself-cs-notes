@@ -1,14 +1,12 @@
 #+title: Study Plan
-
+#+startup: latexpreview
 * Materials
 
 ** Mathematics
 *** Book
 - Mathematics for Computer Science
 *** Video lectures
--[[https://www.youtube.com/playlist?list=PLUl4u3cNGP60UlabZBeeqOuoLuj_KNphQ][MIT 6.042J 2015]]
--[[https://www.youtube.com/playlist?list=PLB7540DEDD482705B][MIT 6.042J 2015 by tom leighton]]
-
+-[[https://www.youtube.com/playlist?list=PLB7540DEDD482705B][MIT 6.042J 2010 by tom leighton]]
 ** Algorithms
 *** Book
 - The Algorithm Design Manual
@@ -58,7 +56,6 @@
 - [[https://www.youtube.com/playlist?list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB][MIT 6.824 Distributed Systems]]
 
 ** Artificial Intelligence and Deep Learning
-
 
 * Study order
 
