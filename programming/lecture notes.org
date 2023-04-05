@@ -1,20 +1,509 @@
 #+title: Lecture Notes
 
 
-#+begin_src racket
-#lang sicp
+** Iterators and Generators
+
+*** iterator example
+#+begin_src python :exports :tangle
+
+def fib_iter(n):
+
+    assert n > 0, "argument must be greater than 0"
+
+    l = [0, 1]
+    if n <= len(l):
+        return iter(l[:n-1])
+    c = 2
 
 
-;; check if string has vowels
-(define (has-vowels str)
+    while c < n:
+        l.append(l[c-1] + l[c-2])
+        c = c + 1
 
-  (if (not (string? str))
-      (error "argument is not a string")
-      (if (map (string-contains? str) '(a e i o u))
-        ;;string contains vowels
-        [])
+    return iter(l)
+
+n = 11
+
+x = fib_iter(n)
+
+l = []
+
+for i in range(0, n):
+     l.append(next(x))
+
+return l
+#+end_src
+
+#+RESULTS:
+| 0 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 |
+
+
+*** generator example
+
+- *generators use yield keyword*
+- saves "state"
+
+#+begin_src python :exports :tangle
+
+def test_generator(n):
+    state = 0
+    for i in range(0, n):
+        yield state
+        n = n + 1
+
+n = 20
+
+x = test_generator(n)
+
+l = []
+
+for i in range(0, n):
+    l += next(x)
+
+return l
 
 #+end_src
 
 #+RESULTS:
-: 43
+
+** Classes and Objects
+
+- class example
+
+#+begin_src python :exports tangle:yes
+
+class Person(a, b):
+
+    def __init__(self, age):
+        self.age = age
+
+
+
+class Citizen(Person):
+
+        def __init__(self, age, country):
+            Person(age)
+            self.country = country
+
+
+
+#+end_src
+
+#+RESULTS:
+
+
+- dog and chicken exercise
+
+#+begin_src python :exports tangle:yes
+
+class DomesticAnimal:
+    def __init__(self, name, owners_name, legs, phrase):
+        self.name = name
+        self.owners_name = owners_name
+        self.legs = legs
+        self.phrase = phrase
+
+    # is it necessary?
+    def speak(self, phrase):
+        print(phrase)
+
+class Dog(DomesticAnimal):
+    def __init__(self, name, owners_name):
+        DomesticAnimal(name, owners_name, 4, "woof!")
+
+    def fetch(self, item):
+        print("I fetched " + item)
+
+
+class Chicken(DomesticAnimal):
+    def __init__(self, name, owners_name):
+        DomesticAnimal(name, owners_name, 2, "cluck!")
+
+
+class GoldenRetriever(Dog):
+    def __init__(self, name, owners_name):
+        Dog(name, owners_name)
+        self.breed = "Golden Retriever"
+
+da = DomesticAnimal("Puss","John", 7, "xd")
+dog = Dog("")
+
+
+return
+
+
+#+end_src
+
+#+RESULTS:
+: None
+** Linked lists
+
+#+begin_src python :exports tangle:yes
+class Link:
+    empty = ()
+
+    def __init__(self, first, rest=empty):
+        # make sure that empty "pointer" has a valid value
+        assert rest is Link.empty or isinstance(rest, Link)
+        self.first = first
+        self.rest = rest
+
+def sum_link(lnk):
+    """ Return the sum of elements of a linked list """
+
+    sum_total = 0
+    if lnk.first is Link.empty:
+        return 0
+
+    if lnk.rest is Link.empty:
+        return lnk.first
+    else:
+        sum_total += lnk.first + sum_link(lnk.rest)
+
+    return sum_total
+
+
+def sum_link_iter(lnk):
+    # ignore types :)
+    if lnk.first is Link.empty:
+        return 0
+
+    acc = lnk.first
+    curr = lnk
+    # we are "grabbing ahead", never trying to go into empty elem
+    while curr.rest is not Link.empty:
+        # "move" to next cell
+        curr = curr.rest
+        # add first cell element
+        acc += curr.first
+
+    return acc
+
+
+
+
+def display_linked_iter(lnk):
+    """
+    display linked list in text format
+    for example:
+
+    >> display_linked(Link(1, Link(2, Link(3))))
+    "[1, 2, 3]"
+    """
+
+    if lnk.first is Link.empty:
+        return "[]"
+
+    result = "[{}, ".format(lnk.first)
+
+    while lnk.rest is not Link.empty:
+        lnk = lnk.rest
+        result += "{}, ".format(lnk.first)
+
+
+    return result[:-2] + "]"
+
+
+inputs = [\
+          Link(1, Link(2, Link(3))),\
+          Link(1, Link(2, Link(3, Link(8, Link(9))))),\
+          Link(5, Link(7, Link(9))),\
+          Link(Link.empty)
+          ]
+
+iter_results = [sum_link_iter(x) for x in inputs]
+rec_results = [sum_link(x) for x in inputs]
+dis_iter_res = [display_linked_iter(x) for x in inputs]
+# dis_rec_res
+
+# return (\
+    #         "recursive sum: ",\
+    #         rec_results,\
+    #         "iterative sum : ",\
+    #         iter_results,\
+    #         "display: ",\
+    #         dis_iter_res\
+    #         )
+
+# Link is ummutable
+# l = Link(1, Link(2))
+# a = l
+# a.first = 2
+# return (display_linked_iter(a),display_linked_iter(l))
+
+
+
+# TODO map over linked list shouldnt modify the original
+def map_link_iter(f, lnk):
+    if lnk is Link.empty: return lnk
+    p = lnk
+    res = Link(Link.empty)
+    r = res
+    while True:
+        r.first = f(p.first)
+        if p.rest is Link.empty: return res
+        r = r.rest
+        p = p.rest
+
+
+
+
+    # res = Link(f(lnk.first), Link.empty)
+    # p = lnk
+    # r = res
+    # while True:
+    #     r.first = f(lnk.first)
+    #     r = r.rest
+    #     if p.rest is Link.empty: return res
+    #     p = p.rest
+
+
+
+def map_link_rec(f, lnk):
+
+    if lnk is Link.empty: return lnk
+
+    return Link(f(lnk.first), map_link_rec(f, lnk.rest))
+
+lnk = Link(1, Link(2, Link(3, Link(4))))
+return (\
+        display_linked_iter(lnk),\
+        display_linked_iter(map_link_rec(lambda x: x * 2, lnk)),\
+        display_linked_iter(lnk),\
+        display_linked_iter(map_link_iter(lambda x: x * 2, lnk)),\
+        display_linked_iter(lnk))
+
+
+
+#+end_src
+
+#+RESULTS:
+
+** Trees
+
+#+begin_src python :exports tangle:yes :results output
+
+
+"""
+
+trees
+
+
+"""
+
+
+def get_label(tree):
+    return tree[0]
+
+def get_branches(tree):
+    return tree[1:]
+
+def is_tree(tree):
+    if type(tree) != list or len(tree) < 1:
+        return False
+    for branch in get_branches(tree):
+        if not is_tree(branch):
+            return False
+    return True
+
+def is_leaf(tree):
+    return not get_branches(tree)
+
+def tree(label, branches=[]):
+    for branch in branches:
+        assert is_tree(branch)
+    return [label] + list(branches)
+
+#awful declaration notation but it shows the structure
+"""
+            8
+          /   \
+        4       3
+      /  \    /  \
+     2    3   1   1
+                 / \
+                1   1
+"""
+t = tree(8,\
+            [tree(4,\
+                  [tree(2,\
+                        []),\
+                   tree(3,\
+                        [])]),\
+             tree(3,\
+                  [tree(1, []),\
+                   tree(1,\
+                        [tree(1, []),\
+                         tree(1, [])])])])
+
+
+def count_nodes_rec(t):
+    """
+    >> t = tree(8, [tree(4, [tree(2, []), tree(3, [])]), tree(3, [tree(1, []), tree(1, [tree(1, []), tree(1, [])])])])
+    >> count_nodes_rec(t)
+    9
+    """
+    #leafs have no children
+    if is_leaf(t):
+        return 1
+    #if it isnt a leaf, it has branches
+    #each branch is a tree
+    return 1 + sum([count_nodes_rec(t) for t in get_branches(t)])
+
+
+def sum_up_nodes(t):
+    """
+    >> t = tree(8, [tree(4, [tree(2, []), tree(3, [])]), tree(3, [tree(1, []), tree(1, [tree(1, []), tree(1, [])])])])
+    >> count_nodes_rec(t)
+    9
+    """
+    return get_label(t) + sum([sum_up_nodes(t) for t in get_branches(t)])
+
+
+def collect_leaves(t):
+    leaves = []
+    if is_leaf(t):
+        return [get_label(t)]
+    for branch in get_branches(t):
+        leaves += collect_leaves(branch)
+    return leaves
+
+
+def print_tree(t, indent_char="\t", indent=0):
+        print("{0}{1}\n".format(indent * indent_char, get_label(t)), end='')
+        if not is_leaf(t):
+            for branch in get_branches(t):
+                print_tree(branch, indent_char, indent + 1)
+
+
+def map_tree(f, t):
+    return [f(get_label(t))] + [map_tree(f, b) for b in get_branches(t)]
+
+
+
+print_tree(map_tree(lambda x: x * 3, t))
+
+
+#+end_src
+
+#+RESULTS:
+: 24
+: 	12
+: 		6
+: 		9
+: 	9
+: 		3
+: 		3
+: 			3
+: 			3
+
+
+
+
+#+begin_src python :exports tangle:yes
+
+#how to flatten a list
+
+def flatten_list_1(l):
+    f = lambda x: x[0]
+    return [f(e) for e in l]
+
+# but this loses information
+# how about
+
+
+def flatten_list_2(l):
+    result = []
+    for s in l:
+        result += s
+    return result
+
+
+return flatten_list_2([[2], [1, 2, 3], [4, 5], "adsfaf"])
+
+
+# now
+# how to flatten arbitrarily nested list
+
+#+end_src
+
+#+RESULTS:
+| 2 | 1 | 2 | 3 | 4 | 5 | a | d | s | f | a | f |
+
+
+
+Are arbitrarily nested lists trees?
+
+lets take a nested list [ [ [ 1, 2 ], [ 1 ], [ 1 ] ]
+
+it can be represented by this tree:
+
+
+            []
+           /  \
+          []  []
+         /  \   \
+        []  []    1
+       /  \  \
+      1   2   1
+
+
+#+begin_src python :exports tangle:yes
+
+l = [[[1, [1, 2], 2], [1]], [1]]
+
+def flatten_list(l, treat_str_as_list=False):
+    """
+
+lets take a nested list [ [ [ 1, 2 ], [ 1 ], [ 1 ] ]
+
+it can be represented by this tree:
+
+
+            []
+           /  \
+          []  []
+         /  \   \
+        []  []    1
+       /  \  \
+      1   2   1
+
+  can treat strings  as lists of 1 char strings
+>> flatten_list([[1, 2], [1, [1, 2, 3], [1, 2, [3, 4, [6, 7]]]]])
+    [1, 2, 1, 1, 2, 3, 1, 2, 3, 4, 6, 7]
+    """
+    #there are kinds of nodes in this tree, "list nodes" and leaves
+    # we only wants to collect and aggregate leaves
+
+    if isinstance(l, str) and len(l) > 1 and treat_str_as_list:
+        # treat string as list of one-character strings
+        l = list(l)
+
+    if isinstance(l, list):
+        # l is a list, attempt to flatten it
+        # return [flatten_nested_list(elem) for elem in l]
+        r = []
+        for elem in l:
+            r += flatten_list(elem, treat_str_as_list)
+        return r
+
+    else:
+        #if l is a leaf return it
+        return [l]
+
+return flatten_list([[], []])
+
+
+#+end_src
+
+#+RESULTS:
+
+
+
+
+
+** Mutable Sequences
+
+#+begin_src python
+
+#+end_src
