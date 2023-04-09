@@ -1,5 +1,8 @@
 #+title: Lecture Notes
 
+** Course info
+- name: cs 61a
+- link: https://www.youtube.com/playlist?list=PLoRTsGsOgdQvAPI33fDL2bpPYtLRrhFyp
 
 ** Iterators and Generators
 
@@ -502,8 +505,54 @@ return flatten_list([[], []])
 
 
 
-** Mutable Sequences
+** Collections
+*** Mutable
+**** Lists
+- ordered
+- stores values of any type (not homogenous)
+#+begin_src python :results output
 
+l = [1, 2, 3, 4]
+l[2] = 5
+# l = [1, 2, 5, 4]
+
+
+
+
+#+end_src
+**** Trees
+
+**** Dictionaries
+- not ordered
+- stores (key : value) pairs
+- access values by passing keys
 #+begin_src python
+#   key  value
+#    |   |
+#    v   v
+d = {1 : "hello"}
+
+
+
+#+end_src
+*** Immutable
+*** Lists
+
+
+
+
+
+*** Withdrawal issue
+
+#+begin_src python :result value
+
+def make_withdrawal(balance):
+
+    def withdraw(amount):
+        pass
+
+    return
+
+    return withdraw
 
 #+end_src
