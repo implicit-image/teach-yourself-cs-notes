@@ -1,0 +1,10 @@
+#+title: Lecture Notes
+
+* Algorithms and Data Structures
+
+** Course info
+- name: CSE373
+- link: https://www.youtube.com/playlist?list=PLOtl7M3yp-DXbHTFe_w9zFPXeau28CDao
+
+
+** Completeness

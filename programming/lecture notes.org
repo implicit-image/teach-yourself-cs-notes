@@ -1,4 +1,18 @@
 #+title: Lecture Notes
+* Programming
+** :TOC:
+- [[#programming][Programming]]
+  - [[#course-info][Course info]]
+  - [[#iterators-and-generators][Iterators and Generators]]
+  - [[#classes-and-objects][Classes and Objects]]
+  - [[#linked-lists][Linked lists]]
+  - [[#trees][Trees]]
+  - [[#collections][Collections]]
+  - [[#mutable-functions-impure][Mutable functions (impure)]]
+  - [[#referential-transparency][Referential transparency]]
+  - [[#measuring-growth-big-o-notation][Measuring growth (Big O notation)]]
+  - [[#interfaces][Interfaces]]
+  - [[#trees-oop][Trees OOP]]
 
 ** Course info
 - name: cs 61a
@@ -151,6 +165,24 @@ class Link:
         self.first = first
         self.rest = rest
 
+    def __eq__(self, other):
+        return self.first == other.first and self.rest == other.rest
+
+    def __contains__(self, other):
+        return other == self.first or other in self.rest
+
+    def __add__(self, other):
+        if self.rest is Link.empty:
+            if other.rest is Link.empty:
+                return Link(self.first, Link(other.first))
+            else:
+                # we cant go with just other here, because we want a copy of other, not the original object
+                #                               v
+                return Link(self.first, Link(other.first) + other.rest)
+        else:
+            # first arg is Link(1, Link(...))
+            return Link(self.first, self.rest + other)
+
 def sum_link(lnk):
     """ Return the sum of elements of a linked list """
 
@@ -268,22 +300,24 @@ def map_link_rec(f, lnk):
 
     return Link(f(lnk.first), map_link_rec(f, lnk.rest))
 
-lnk = Link(1, Link(2, Link(3, Link(4))))
-return (\
-        display_linked_iter(lnk),\
-        display_linked_iter(map_link_rec(lambda x: x * 2, lnk)),\
-        display_linked_iter(lnk),\
-        display_linked_iter(map_link_iter(lambda x: x * 2, lnk)),\
-        display_linked_iter(lnk))
+lnk1 = Link(1, Link(2, Link(3, Link(4))))
+lnk2 = Link(2, Link(2, Link(3, Link(4))))
+# return (\
+#         display_linked_iter(lnk),\
+#         display_linked_iter(map_link_rec(lambda x: x * 2, lnk)),\
+#         display_linked_iter(lnk),\
+#         display_linked_iter(map_link_iter(lambda x: x * 2, lnk)),\
+#         display_linked_iter(lnk))
 
 
+return display_linked_iter(lnk1 + lnk2)
 
 #+end_src
 
 #+RESULTS:
+| 1 | 2 | 3 | 4 | 2 | 2 | 3 | 4 |
 
 ** Trees
-
 #+begin_src python :exports tangle:yes :results output
 
 
@@ -500,27 +534,44 @@ return flatten_list([[], []])
 #+end_src
 
 #+RESULTS:
-
-
-
-
-
 ** Collections
 *** Mutable
 **** Lists
 - ordered
 - stores values of any type (not homogenous)
+***** mutating operations on lists
 #+begin_src python :results output
 
 l = [1, 2, 3, 4]
 l[2] = 5
-# l = [1, 2, 5, 4]
+#l = [1, 2, 5, 4]
 
+l.append(2)
+# returns None
+# l = [1, 2, 5, 4, 2]
 
+l.extend([0, 1])
+#returns None
+# l = [1, 2, 5, 4, 2, 0, 1]
 
+#       index item
+#          |   |
+#          v   v
+l.insert(3, "summer")
+# returns None
+# l = [1, 2, 5, "summer", 4, 2, 0, 1]
+
+l.pop()
+# returns 1 , the last element of a list
+# l = [1, 2, 5, "summer", 4, 2, 0]
+
+#     item to remove first occurance of
+#         |
+#         v
+l.remove("summer")
+# l = [1, 2, 5, 4, 2, 0]
 
 #+end_src
-**** Trees
 
 **** Dictionaries
 - not ordered
@@ -530,29 +581,195 @@ l[2] = 5
 #   key  value
 #    |   |
 #    v   v
-d = {1 : "hello"}
+d = {1 : "hello", 2 : " ", 3 : "world"}
+d[4] = "!"
+# d = { ..., 4 : "!"}
+# !!! dictionaries dont really have order !!!
+
+d.keys()
+# returns [1, 2, 3, 4]
+
+d.values()
+# returns ["hello", " ", "world", "!"]
+
+d.items()
+# returns [(1, "hello"), ....]
+
+lst = [1, 2, 3]
+
+letters = {}
+
+for i in range(len(lst)):
+    letters[i] = i - 1
+
+# letters = { 1 : 0, 2 : 1, 3 : 2 }
+
+#+end_src
+
+*** Immutable
+
+**** Strings
+- not lists!!!!!
+
+**** Tuples
+- ordered
+- immutable
+- works like a list but immutable
+#+begin_src python
+
+
+t = (1, 2, 3, 4)
+
+t[2]
+# returns 3
+
+def f():
+    return 1, 2
+
+a, b = f()
+# a  = 1, b = 2
 
 
 
 #+end_src
-*** Immutable
-*** Lists
 
+** Mutable functions (impure)
 
+#+begin_src python
 
-
-
-*** Withdrawal issue
-
-#+begin_src python :result value
-
-def make_withdrawal(balance):
+def make_withdraw(balance):
 
     def withdraw(amount):
-        pass
+        #make balance refer to a variable in parent frame
+        nonlocal balance
 
-    return
+        if amount > balance: return "insufficient funds"
 
+        balance = balance - amount
+        return balance
+
+    #returns a function
     return withdraw
 
 #+end_src
+
+** Referential transparency
+- nonlocal allows to *modify* bindings (bindings *not* variables) in a parent frame instead of just lookng it up
+- you dont need nonlocal to mutate a value in a parent frame (ex lst.pop())
+- variable declared nonlocal must:
+  + exist in a parent frame (other than the global frame)
+  + not exist in a current frame
+
+
+#+begin_src python
+
+#returns a function returning a function, overwrites its argument
+def f(x):
+    x = 4
+    # returns function h(z), which returns a value parametrized by y
+    def g(y):
+        # returns a value, takes x from frame f and modifies it
+        def h(z):
+            nonlocal x # we need nonlocal to modify the binding in a parent frame
+            x = x + 1
+            return x + y + z
+        return h
+    return g
+
+# we can ignore 1, its just f(), which returns function g(y)
+a = f(1)
+# now a is g(y)
+# b is g(2), y is 2
+b = a(2)
+# g(2) returns h(z)
+# nonlocal x in h is 4
+# total = h(3) + h(4)
+# z is 3 and 4
+# x is 5 after b(3), 6 after b(4)
+# y is 2
+# total is 10 + 12 (each call to b (which is h(z) modifies x))
+total = b(3) + b(4)
+
+#+end_src
+
+
+
+** Measuring growth (Big O notation)
+
+\begin{document}
+Let f, the function to be estimated, be a real or complex valued function and let g g, the comparison function, be a real valued function. Let both functions be defined on some unbounded subset of the positive real numbers, and  g(x) be strictly positive for all large enough values of x. One writes
+
+{\displaystyle f(x)=O{\bigl (}g(x){\bigr )}\quad {\text{ as }}x\to \infty }
+
+if the absolute value of f(x) is at most a positive constant multiple of g(x) for all sufficiently large values of x. That is,
+
+{\displaystyle f(x)=O{\bigl (}g(x){\bigr )}}
+
+if there exists a positive real number M and a real number x_{0} such that
+
+{\displaystyle |f(x)|\leq Mg(x)\quad {\text{ for all }}x\geq x_{0}.}
+\end{document}
+
+
+** Interfaces
+
+*** Magic methods
+
+#+begin_src python
+
+class A:
+    def __init__(self, num):
+        self.num = num
+
+    # equals to str(a) whrere a = A()
+    # defines whats prints displays, if __str__ is not defined
+    # print uses __repr__
+    def __str__(self):
+        return 'Object A'
+    #defines what interactive interpreter displays
+    def __repr__()
+        return 'Object A'
+
+
+
+#+end_src
+** Trees OOP
+
+#+begin_src python
+
+class Tree:
+    def __init__(self, label, branches=[]):
+        for b in branches:
+            assert isinstance(b, Tree)
+        self.label = label
+        self.branches = branches
+
+    def is_leaf(self):
+        return not self.branches
+
+
+
+# Pruning a tree
+# give a a tree t and value x remove each branch with label equal to x
+
+def prune(tree, x):
+
+
+    for b in tree.branches:
+        if b.label == x:
+            tree.branches.remove(b)
+        else:
+            prune(b, x)
+
+t = Tree(3, [Tree(1, [Tree(0), Tree(1)]), Tree(2, [Tree(1), Tree(1, [Tree(0), Tree(1)])])])
+
+prune(t, 1)
+
+return t.label, t.branches[0].label
+#+end_src
+
+#+RESULTS:
+| 3 | 2 |
+
+
+

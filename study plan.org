@@ -24,14 +24,14 @@
 - Structure and interpretation of computer programs
 *** Video lectures
 -[[https://www.youtube.com/playlist?list=PLhMnuBfGeCDNgVzLPxF9o5UNKG1b-LFY9][UC Berkeley CS 61A SICP]]
+*** Lecture notes
+- [[./programming/lecture notes.org][lecture notes]]
 
 ** Operating Systems
 *** Book
 - Operating Systems: Three Easy Pieces
 *** Video Lectures
 -[[https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC][ Berkeley CS 162 Operating Systems and Systems Programming]]
-*** Lecture notes
-- [[./programming/lecture notes.org][lecture notes]]
 
 ** Computer Networking
 *** Book
