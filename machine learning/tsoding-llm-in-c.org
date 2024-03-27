@@ -1,0 +1,26 @@
+#+title: Tsoding LLM In C
+
+
+* Table of contents :toc:
+- [[#episode-1][Episode 1]]
+
+* Episode 1
+
+#+begin_src C
+#include <stdio.h>
+
+
+
+int main() {
+    printf("TEST");
+
+
+    return 0;
+}
+
+
+
+#+end_src
+
+#+RESULTS:
+: TEST

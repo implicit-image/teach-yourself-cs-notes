@@ -1,0 +1,214 @@
+#+title: Rust Book
+
+
+* Table of contents :toc:
+- [[#basics][Basics]]
+  - [[#data-types][Data types]]
+  - [[#functions][Functions]]
+- [[#memory-management][Memory management]]
+  - [[#ownership][Ownership]]
+  - [[#stack-and-heap][Stack and heap]]
+
+* Basics
+
+#+begin_src rust :results
+let a: u32 = 56;
+#+end_src
+
+** Data types
+
+- Every value is of certain type
+- two data type subsets: scalar and compound
+
+*** Scalar Types
+**** Integer
+
+- integer :: a number without fractional component
+
+| Length  | Signed | Unsigned |
+|---------+--------+----------|
+| 8 bit   | i8     | u8       |
+| 16 bit  | i16    | u16      |
+| 32 bit  | i32    | u32      |
+| 64 bit  | i64    | u64      |
+| 128 bit | i128   | u128     |
+| arch    | isize  | usize    |
+
+Integers in rust can be written in several ways
+
+#+begin_src rust
+let dec = 98_000;
+let hex = 0xff;
+let octal = 0o77;
+let binary = 0b1111_0000;
+let byte = b'A'; // only for u8
+#+end_src
+
+**** Floating point number
+
+- floating point number :: represents numbers with decimal points
+
+| Length | Type |
+|--------+------|
+| 32 bit | f32  |
+| 64 bit | f64  |
+
+**** Boolean
+
+- boolean :: represents true and false
+  - one byte in size
+
+#+begin_src rust
+let t: bool = true;
+#+end_src
+
+**** Char
+- character :: represents characters
+
+#+begin_src rust
+let c: char = 'x';
+let emoji = '😻'
+#+end_src
+
+
+*** Compund types
+**** Tuple
+- tuple :: a general way of grouping a number of values into one type.
+
+#+begin_src rust :results no
+let tp: (i32, i32, &str) = (100, 100, "ees");
+#+end_src
+
+To get values out of the tuple, use pattern matching:
+
+#+begin_src rust
+
+let tp: (i32, i32) = (12, 324);
+let (x, y) = tp;
+println!("{x}");
+#+end_src
+
+#+RESULTS:
+: 12
+
+~.<index>~ accessor can also be used:
+
+#+begin_src rust
+let tp: (i32, i32) = (12, 324);
+println!("{:?}", tp.1);
+#+end_src
+
+#+RESULTS:
+: 324
+
+A tuple with no elements ~()~ is called a ~unit~.
+
+**** Array
+ - array :: a fixed length collection of values of the same type.
+
+#+begin_src rust
+let arr: [i32; 3] = [1, 2, 3];
+#+end_src
+
+
+Elements of an array can be accessed with indexing:
+
+#+begin_src rust
+let arr: [i32; 3] = [1, 2, 3];
+let first = arr[0];
+let (second, third) = (arr[1], arr[2]);
+println!("{}", second)
+#+end_src
+
+#+RESULTS:
+: 2
+
+If index is bigger than array length -1, the program panics:
+#+begin_src rust :results verbatim
+let index = 7;
+let arr = [1, 2, 3, 4, 5];
+println!("{}", arr[index]);
+#+end_src
+
+#+RESULTS:
+: error: Could not compile `cargohIiTSR`.
+
+**** String
+
+- string :: represents text
+
+Strings can be created from string literals:
+#+begin_src rust
+let mut s = String::from("hello");
+s.push_str(", world!");
+println!("{}", s);
+#+end_src
+
+#+RESULTS:
+: hello, world!
+
+***** Difference between string literals and ~String~
+
+#+begin_src rust
+let s1 = String::from("hello");
+// at assignment, s1 is dropped
+let s2 = s1;
+//compile error
+//println!("{}", s1)
+#+end_src
+
+#+RESULTS:
+
+
+** Functions
+
+- defined with ~fn~ keyword
+
+#+begin_src rust
+fn main() {
+    let t = another();
+    println!("{:?}", t);
+}
+
+fn another() -> &'static str {
+    return "hello";
+}
+#+end_src
+
+#+RESULTS:
+: "hello"
+
+Function parameters
+* Memory management
+
+** Ownership
+
+Ownership is rust's way of managing memory. It is checked at compile time.
+
+Ownership rules:
+- every value has an _owner_
+- there can be only _1_ owner at a time
+- if the owner goes out of scope, all the value it owns are dropped
+
+
+#+begin_src rust
+let outer: str = "hello";
+{
+    println!("{outer}");
+    let inner: str = "hey";
+}
+// this does not compile, inner is not in scope
+println!("{inner}")
+
+#+end_src
+
+#+RESULTS:
+: error: Could not compile `cargoEVdKak`.
+
+
+
+** Stack and heap
+
+- Stack ::
+
+- Heap ::

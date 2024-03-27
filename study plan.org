@@ -6,38 +6,49 @@
 *** Book
 - Mathematics for Computer Science
 *** Video lectures
--[[https://www.youtube.com/playlist?list=PLB7540DEDD482705B][MIT 6.042J 2010 by tom leighton]]
+-https://www.youtube.com/playlist?list=PLB7540DEDD482705B
+*** Course Website
+- https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/
+
 ** Algorithms
 *** Book
 - The Algorithm Design Manual
 *** Video lectures
--[[https://www.youtube.com/playlist?list=PLOtl7M3yp-DX6ic0HGT0PUX_wiNmkWkXx][Steven Skiena Analysis of Algotrithms Lectures]]
+- https://www.youtube.com/playlist?list=PLOtl7M3yp-DX6ic0HGT0PUX_wiNmkWkXx
+*** Course Website
+- https://www3.cs.stonybrook.edu/~skiena/373/
 
 ** Computer Architecture
 *** Book
 - Computer Systems: A Programmer's Perspective
 *** Video lectures
--[[https://www.youtube.com/playlist?list=PLhMnuBfGeCDM8pXLpqib90mDFJI-e1lpk][UC Berkeley CS 61C ]]
+- https://www.youtube.com/playlist?list=PLhMnuBfGeCDM8pXLpqib90mDFJI-e1lpk
+*** Course website
+- https://inst.eecs.berkeley.edu/~cs61c/sp15/
 
 ** Programming
 *** Book
 - Structure and interpretation of computer programs
 *** Video lectures
--[[https://www.youtube.com/playlist?list=PLhMnuBfGeCDNgVzLPxF9o5UNKG1b-LFY9][UC Berkeley CS 61A SICP]]
+- https://www.youtube.com/playlist?list=PLhMnuBfGeCDNgVzLPxF9o5UNKG1b-LFY9
 *** Lecture notes
 - [[./programming/lecture notes.org][lecture notes]]
+*** Course Website
+- https://cs61a.org/
 
 ** Operating Systems
 *** Book
 - Operating Systems: Three Easy Pieces
 *** Video Lectures
 -[[https://www.youtube.com/playlist?list=PLF2K2xZjNEf97A_uBCwEl61sdxWVP7VWC][ Berkeley CS 162 Operating Systems and Systems Programming]]
+*** Course Website
+-
 
 ** Computer Networking
 *** Book
 - Computer Networking: A Top-down Approach
 *** Video Lectures
--[[https://www.youtube.com/playlist?list=PL6RdenZrxrw9inR-IJv-erlOKRHjymxMN][ CS 144 Introuction to Computer Networking]]
+-https://www.youtube.com/playlist?list=PL6RdenZrxrw9inR-IJv-erlOKRHjymxMN
 
 ** Databases
 *** Book
@@ -59,15 +70,4 @@
 
 ** Artificial Intelligence and Deep Learning
 
-* Study order
-
-
-1. Maths
-2. Algorithms
-3. Programming
-4. Architecture
-5. Operating Systems
-6. Networking
-7. Databases
-8. Languages and Compilers
-9. Distributed Systems
+** Web Applications

@@ -1,1 +1,40 @@
 #+title: Lecture Notes
+
+** :TOC:
+  - [[#6-great-ideas-in-cs][6 great ideas in CS]]
+  - [[#twos-complement][Two's complement]]
+  - [[#r][r]]
+
+** 6 great ideas in CS
+
+- Abstraction - layers of representation
+- Moore's Law
+- Principle of locality - memory hierarchy (cache -> ram -> disk ...)
+- Parallelism
+- Performance measuerement and improvement
+- Dependability via redudndancy
+
+
+** Two's complement
+
+
+- the problem: how to represent both negative and positive numbers
+- using the first bit as a "sign" (+/-) doesnt work
+
+  10000000 and 00000000 both have value 0, but a different sign
+
+- so instead:
+  + we "reserve" first bit of a number:
+    <0000, 0111> is a range of all positive numbers possible to note with 4 bits
+    <1111, 1111> is a range of all negative numbers
+
+  + we calculate a negative number -x by taking binary represantation of x, eg 6 (0110) and:
+    1. flip all bits (1001)
+    2. add 1 (1010)
+    3. calculate the number normally (by adding place digits, except the sign digit is negative) (-8 + 0 + 2 + 0 = -6)
+
+
+
+
+
+** r

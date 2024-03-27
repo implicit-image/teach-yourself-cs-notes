@@ -1,10 +1,24 @@
-#+title: Lecture Notes
+#+title: Algorithms and Data Structures Notes
 
-* Algorithms and Data Structures
+** :TOC:
+  - [[#course-info][Course info]]
+  - [[#completeness][Completeness]]
 
 ** Course info
 - name: CSE373
-- link: https://www.youtube.com/playlist?list=PLOtl7M3yp-DXbHTFe_w9zFPXeau28CDao
+- link: https://www.youtube.com/playlist?list=PLOtl7M3yp-DX6ic0HGT0PUX_wiNmkWkXx
 
 
 ** Completeness
+
+
+#+begin_src d
+#include <stdio.h>
+
+printf("hello!");
+
+
+#+end_src
+
+#+RESULTS:
+: hello!

@@ -1,0 +1,33 @@
+#+title: Notes
+
+
+
+* Table of contents :toc:
+- [[#lecture-1][Lecture 1]]
+- [[#lecture-2---bezier-curves-and-splines][Lecture 2 - Bezier Curves and splines]]
+
+* Lecture 1
+
+
+#+begin_src cpp :results value
+#include <iostream>
+
+using namespace std;
+
+
+int main() {
+    cout << "hello";
+    return 0;
+}
+
+#+end_src
+
+#+RESULTS:
+: hello
+
+
+
+
+* Lecture 2 - Bezier Curves and splines
+
+- Parametric geometry

@@ -1,8 +1,7 @@
-#+title: Lecture Notes
-* Programming
+#+PROPERTY: header-args :results verbatim
+#+title: Programming Intro Notes
 ** :TOC:
-- [[#programming][Programming]]
-  - [[#course-info][Course info]]
+  - [[#meta][META]]
   - [[#iterators-and-generators][Iterators and Generators]]
   - [[#classes-and-objects][Classes and Objects]]
   - [[#linked-lists][Linked lists]]
@@ -14,7 +13,7 @@
   - [[#interfaces][Interfaces]]
   - [[#trees-oop][Trees OOP]]
 
-** Course info
+** META
 - name: cs 61a
 - link: https://www.youtube.com/playlist?list=PLoRTsGsOgdQvAPI33fDL2bpPYtLRrhFyp
 
@@ -52,7 +51,7 @@ return l
 #+end_src
 
 #+RESULTS:
-| 0 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 |
+: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
 
 *** generator example
@@ -380,7 +379,7 @@ def count_nodes_rec(t):
     >> count_nodes_rec(t)
     9
     """
-    #leafs have no children
+    #leaves have no children
     if is_leaf(t):
         return 1
     #if it isnt a leaf, it has branches
@@ -528,12 +527,13 @@ it can be represented by this tree:
         #if l is a leaf return it
         return [l]
 
-return flatten_list([[], []])
+return flatten_list(l)
 
 
 #+end_src
 
 #+RESULTS:
+: [1, 1, 2, 2, 1, 1]
 ** Collections
 *** Mutable
 **** Lists
@@ -689,8 +689,12 @@ b = a(2)
 # y is 2
 # total is 10 + 12 (each call to b (which is h(z) modifies x))
 total = b(3) + b(4)
+return total
 
 #+end_src
+
+#+RESULTS:
+: 22
 
 
 
@@ -769,7 +773,4 @@ return t.label, t.branches[0].label
 #+end_src
 
 #+RESULTS:
-| 3 | 2 |
-
-
-
+: (3, 2)

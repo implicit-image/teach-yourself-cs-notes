@@ -1,0 +1,10 @@
+#+title: Stanford CS221
+
+* Table of contents :toc:
+- [[#lecture-1][Lecture 1]]
+
+* [[https://www.youtube.com/watch?v=J8Eh7RqggsU&list=PLoROMvodv4rO1NB9TD4iUZ3qghGEGtqNX][Lecture 1]]
+
+#+begin_src C
+
+#+end_src

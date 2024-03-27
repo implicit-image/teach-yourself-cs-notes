@@ -1,0 +1,200 @@
+#+title: Javascript
+
+* Table of contents :toc:
+- [[#use-strict-modern-js]["use strict", modern JS]]
+- [[#basics][Basics]]
+  - [[#variables][Variables]]
+  - [[#data-types][Data Types]]
+- [[#nullish-coalescing-operator-][Nullish coalescing operator '??']]
+- [[#functions][Functions]]
+  - [[#callback-functions][Callback functions]]
+- [[#javascript-specials][Javascript specials]]
+- [[#custom-html-elements][Custom Html elements]]
+  - [[#new-custom-elements][New custom elements]]
+  - [[#rendering-order][Rendering order]]
+  - [[#custom-elements-derived-from-existing-elements][Custom elements derived from existing elements]]
+  - [[#important-htmlelement-methods][Important HTMLElement methods]]
+
+* "use strict", modern JS
+
+Use ~"use strict"~ directive to enable backward-incompatible ECMAScript 5+ features.
+The features are enabled for all code in scope after the directive. This means that ~"use strict"~ can be enabled on per function basis.
+~"use strict"~ is enabled by default in classes and modules.
+
+
+* Basics
+
+** Variables
+*** let, var keywords
+Variables can be declared using ~let~ or ~var~ keywords.
+
+#+begin_src js :results none
+let a = 1
+var b = "variable"
+alert("hello")
+#+end_src
+
+~let~ keyword is preffered
+
+*** const keyword
+
+~const~ keyword is used to declare constants, i.e. variables that cannot be reassigned.
+
+** Data Types
+
+Variables in javascript do not have types assigned to them. This means that this:
+
+#+begin_src js
+let string = "string"
+string = 1
+#+end_src
+
+is absolutely legal and permitted.
+
+*** Number
+Represents numbers, both integers and floating point.
+Value range is (2^53-1) to -(2^53-1)
+
+Contains  special numeric values such as
++ ~Infinity~, ~-Infinity~
+  - the biggest and the smallest ~Infinity > <any number>~ is always true
++ ~NaN~
+  - not a anumber
+
+*** BigInt
+Represents integers of arbitrary length.
+*** String
+*** Boolean
+*** null
+*** undefined
+*** Objects and Symbols
+*** typeof operator
+
+* Nullish coalescing operator '??'
+
+~a ?? b~ returns a if a is defined and not null, else it returns b.
+
+
+#+begin_src js
+function get() {
+  let value = Math.random() * 10
+  if (value > 5)
+    return value
+  return null
+}
+
+let a = get()
+let defaultValue = 5
+let result = a ?? defaultValue
+return result
+#+end_src
+
+#+RESULTS:
+: 7.966690608108928
+
+Comparing with ~||~ operator, ~||~ does not distinguish between "falsey" values and undefined values, that is ~??~ treats ~""~ as a defined value and returns it, while ~||~ treats it as "falsey" and returns the other one
+
+* Functions
+There are several way to define a function:
+
+#+begin_src js
+// function declaration
+function hello() {
+  console.log("hello")
+}
+
+//function expression
+let hi = function() {
+  console.log("hi")
+}
+
+//hey() is equivalent to hello()
+let hey = hello
+#+end_src
+
+** Callback functions
+
+* Javascript specials
+* Custom Html elements
+** New custom elements
+New custom HTML elements can be defined by extending abstract class
+~HTMLElement~. For instance, element defined below displays formatted time.
+
+#+begin_src js
+class FormattedTime extends HTMLElement {
+  render() {
+    let date = new Date(this.getAttribute('datetime') || Date.now())
+    this.innerHtml = new Intl.DateTimeFormat('default', {
+      year: this.getAttribute('year') || undefined,
+      month: this.getAttribute('month') || undefined,
+      day: this.getAttribute('day') || undefined,
+      hour: this.getAttribute('hour') || undefined,
+      minute: this.getAttribute('minute') || undefined,
+      second: this.getAttribute('second') || uundefined,
+      timeZoneName: this.getAttribute('time-zone-name') || undefined
+    }).format(date)
+  }
+
+  // called when the element is added to DOM
+  // children of the element are not accessible in this function
+  connectedCallback() {
+    if (!this.rendered) {
+      this.render()
+      this.rendered = true
+    }
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.render()
+  }
+
+  static get observedAttributes() {
+    return ['datetime', 'year', 'month', 'day',
+            'hour', 'minute', 'second', 'time-zone-name']
+  }
+}
+#+end_src
+
+After defining the element, it has to be added to ~customElements~ list
+
+#+begin_src js
+customElements.define("formatted-time", FormattedTime)
+#+end_src
+
+
+** Rendering order
+HTML elements are added to DOM sequencially, parents before children.
+
+** Custom elements derived from existing elements
+There  are several issues with custom elements derived from abstract class ~HTMLElement~:
+- they are not recognized by accessabliity software
+- search engines dont handle them very well
+
+To solve those issues, an ~Element~ can be derived from an existing element, for example ~HTMLButtonElement~:
+
+#+begin_src js
+
+class MyButton extends HTMLButtonElement {
+
+  constructor() {
+    super()
+    this.addEventListener('click', () => alert('Hello!'))
+  }
+
+}
+
+#+end_src
+
+Derived Elements also have to be added to ~customElements~
+
+#+begin_src js
+customElements.define('mybutton', MyButton, {extends: 'button'})
+#+end_src
+
+
+#+begin_comment
+custom elements derived from existing HTML elements must call ~super()~ in their ~constructor()~ method.
+#+end_comment
+
+** Important HTMLElement methods
+***
