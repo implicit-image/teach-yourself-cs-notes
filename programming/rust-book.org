@@ -150,14 +150,17 @@ println!("{}", s);
 ***** Difference between string literals and ~String~
 
 #+begin_src rust
+use std::assert;
+
 let s1 = String::from("hello");
 // at assignment, s1 is dropped
 let s2 = s1;
+assert!(s1, "already dropped");
 //compile error
-//println!("{}", s1)
 #+end_src
 
 #+RESULTS:
+: error: Could not compile `cargoFYPdfI`.
 
 
 ** Functions
@@ -178,9 +181,7 @@ fn another() -> &'static str {
 #+RESULTS:
 : "hello"
 
-Function parameters
 * Memory management
-
 ** Ownership
 
 Ownership is rust's way of managing memory. It is checked at compile time.
@@ -192,19 +193,19 @@ Ownership rules:
 
 
 #+begin_src rust
-let outer: str = "hello";
+let outer: &str = "hello";
 {
     println!("{outer}");
-    let inner: str = "hey";
+    let inner: &str = "hey";
 }
 // this does not compile, inner is not in scope
-println!("{inner}")
+println!("gsfdg");
 
 #+end_src
 
 #+RESULTS:
-: error: Could not compile `cargoEVdKak`.
-
+: hello
+: gsfdg
 
 
 ** Stack and heap

@@ -1,0 +1,51 @@
+#+title: Transformers
+#+header: :session
+
+
+* :toc:
+  - [[#setup][Setup]]
+  - [[#intro][Intro]]
+
+** Setup
+#+begin_src sh :results silent :async t
+python3 -m venv "/home/b/org/teach-yourself-cs-notes/ml/venv"
+source "/home/b/org/teach-yourself-cs-notes/ml/venv/bin"/activate
+pip3 install "transformers[torch]"
+#+end_src
+
+
+#+BEGIN_SRC elisp
+(setq org-babel-python-command "/home/b/org/teach-yourself-cs-notes/ml/venv/bin/python")
+#+END_SRC
+
+#+RESULTS:
+: /home/b/org/teach-yourself-cs-notes/ml/venv/bin/python
+
+#+BEGIN_SRC elisp
+(pyvenv-workon "/home/b/org/teach-yourself-cs-notes/ml/venv")
+#+END_SRC
+
+#+RESULTS:
+
+** Intro
+
+
+
+#+begin_src bash :results verbatim
+echo $VIRTUAL_ENV
+which python
+#+end_src
+
+#+RESULTS:
+: /home/b/.virtualenvs/home/b/org/teach-yourself-cs-notes/ml/venv
+: /usr/bin/python
+
+
+#+begin_src python :results verbatim
+from transformers import pipeline
+
+classifier = pipeline("sentiment-analysis")
+classifier("I've been waiting for a HuggingFace course my whole life.")
+#+end_src
+
+#+RESULTS:
