@@ -1,1 +1,1 @@
-# My study plan and notes for [teachyourselfcs.com](https://teachyourselfcs.com) 
+# Structured notes for learning

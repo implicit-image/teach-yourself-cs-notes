@@ -1,0 +1,56 @@
+#+title: Statistics
+
+
+
+
+* :toc:
+-  [[#identifying-individuals-variables-and-categorical-variables-in-a-data-set][Identifying individuals, variables and categorical variables in a data set]]
+  - [[#types-of-variables][Types of variables]]
+
+*  Identifying individuals, variables and categorical variables in a data set
+
+** Types of variables
+- categorical :: discrete types of stuff
+- quantitative :: represent number of  stuff
+
+#+name: len_table
+| Name   | data |
+|--------+------|
+| Alice  | 12   |
+| Bob    | 14.5 |
+| Eve    | 11   |
+| John   | 10   |
+
+#+name len_table_exp
+#+begin_src elisp :var len_tab=len_table :results file :file len_table.csv
+(orgtbl-to-csv len_tab nil)
+#+end_src
+
+#+RESULTS:
+[[file:len_table.csv]]
+
+#+begin_src R :file 5.png :results graphics file
+library(lattice)
+data <- read.csv("./len_table.csv")
+d <- data.frame(index=1:4, x=rnorm(4), y=rnorm(2))
+matplot(data[, 1], data[, -1], type="l", xlim=10)
+#+end_src
+
+#+RESULTS:
+[[file:5.png]]
+
+
+#+begin_src python :var filename="matplotlib.jpg" :file matplotlib.jpg :results graphics file
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2 * np.pi, 200)
+y = np.sin(x)
+
+fig, ax = plt.subplots()
+ax.plot(x, y)
+plt.savefig(filename)
+#+end_src
+
+#+RESULTS:
+[[file:matplotlib.jpg]]

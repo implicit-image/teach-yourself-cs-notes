@@ -1,0 +1,50 @@
+#+title: SSH
+
+
+* :toc:
+-  [[#overview][Overview]]
+-  [[#architecture][Architecture]]
+-  [[#connecting-to-a-remote-host][Connecting to a remote host]]
+
+*  Overview
+
+SSH is a  network protocol that supercedes previous plain-text remote protocols like Telnet and Remote Shell.
+
+*  Architecture
+
+
+*  Connecting to a remote host
+
+1. Generate key
+
+If you dont have a key you have to generate it using ssh-keygen.
+
+#+begin_example shell
+ssh-keygen -t <key type> [other args]
+#+end_example
+
+
+<key type> can be:
+- dsa - Digital Signature Algorithm
+
+- ecdsa
+
+- ecdsa-sk
+
+- ed25519
+
+- ed25519-sk
+
+- rsa
+
+2. Add private key to ssh-agent
+
+#+begin_example shell
+ssh-add ~/path/to/public/key
+#+end_example
+
+3. Connect to the remote host
+
+#+begin_example shell
+ssh <username>@<hostname/ip address>
+#+end_example

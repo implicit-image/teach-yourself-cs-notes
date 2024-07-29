@@ -1,0 +1,17 @@
+#+title: latex
+
+
+\begin{document}
+\documentclass[12pt, letterpaper]{article}
+\usepackage{tikz}
+\title{LaTeX tutorial}
+\author{Błażej Niewiadomski}
+\date{July 2024}
+\maketitle
+First document. This is a simple example, with no extra parameters or packages included.
+\begin{tikzpicture}
+\draw (0,0) rectangle (4,4);
+\end{tikzpicture}
+% this is a comment.
+% it will not appear in the document.
+\end{document}

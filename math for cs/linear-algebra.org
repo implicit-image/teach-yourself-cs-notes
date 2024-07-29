@@ -1,0 +1,16 @@
+#+title: Linear Algebra
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \tikzexternalize
+
+* Vector operations
+
+**  Sum
+
+
+\begin{article}
+
+\sqrt{23} + 4c + 3\(^{3}\)
+
+\end{article}
+
+
